@@ -1,0 +1,27 @@
+{
+    "name": "cfg-task-v1.0.0",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "nodemon ./bin/www -e *"
+    },
+    "dependencies": {
+        "cookie-parser": "~1.4.4",
+        "debug": "~2.6.9",
+        "express": "~4.16.1",
+        "morgan": "~1.9.1"
+    },
+    "description": "Application de gestion taches multi utilisateur avec mis a jour en direct, utilisation de node , express, mongoose, vue js",
+    "main": "app.js",
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Gilles-boyer/cfg_task_v1.0.0.git"
+    },
+    "author": "Gilles BOYER",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Gilles-boyer/cfg_task_v1.0.0/issues"
+    },
+    "homepage": "https://github.com/Gilles-boyer/cfg_task_v1.0.0#readme"
+}
