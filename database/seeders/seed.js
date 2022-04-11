@@ -1,23 +1,29 @@
 const folder = require("../factories/folder.factory");
+const level = require("../factories/level.factory");
+const user = require("../factories/user.factory");
+const Task = require("../factories/task.factory");
+const UserTask = require("../factories/userTask.factory");
 
-function seed(nbr, factory) {
-
-    var tab = factory.Factory(nbr);
-
-    if (tab.length > 0) {
-        tab.forEach(element => {
-            element.save((err, element) => {
-                if (err) return console.log(err);
-                return console.log(element);
-            })
+async function seed(nbr, factory) {
+    var res = await factory.Factory(nbr);
+    if (res.length > 0) {
+        res.forEach(element => {
+            element.save((err, task) => {
+                if (err) return console.log(err);;
+                return console.log(task);
+            });
         });
     } else {
-        return console.log('this model is already seed');
+        console.log("this model is already seed");
     }
 }
 
-module.exports.seeders = (req, res) => {
-    seed(1, folder)
+module.exports.seeders = async(req, res) => {
+    await seed(10, folder);
+    await seed(5, level);
+    await seed(10, user);
+    await seed(30, Task);
+    await seed(60, UserTask);
 
-    res.json("seed effectué");
+    res.json("seed effected");
 }

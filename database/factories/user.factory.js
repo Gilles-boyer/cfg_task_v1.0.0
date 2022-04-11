@@ -1,10 +1,6 @@
 const { faker } = require('@faker-js/faker');
-const Folder = require("../../models/Folder.Model");
-
-module.exports.asyncFind = async function() {
-    var res = await Folder.find();
-    return res;
-}
+const User = require("../../models/User.Model");
+const bcrypt = require('bcrypt');
 
 function VerifySeed(model) {
 
@@ -20,18 +16,20 @@ function VerifySeed(model) {
         }
     );
 }
-
 module.exports.Factory = function(nbr) {
     var tab = [];
 
-    return VerifySeed(Folder)
+    return VerifySeed(User)
         .then(res => {
             if (res) {
                 for (let x = 0; x < nbr; x++) {
-                    var folder = new Folder({
-                        label: faker.company.companyName()
+                    var user = new User({
+                        firstName: faker.name.firstName(),
+                        lastName: faker.name.lastName(),
+                        email: faker.internet.email(),
+                        password: bcrypt.hashSync('password', 12)
                     });
-                    tab.push(folder);
+                    tab.push(user);
                 }
             }
             return tab;
