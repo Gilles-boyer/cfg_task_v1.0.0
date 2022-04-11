@@ -22,9 +22,21 @@ const TaskSchema = new Schema({
     },
     level: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'folders',
+        ref: 'levels',
         required: true
     }
+}, {
+    timestamps: true,
+    versionKey: false,
+    selectPopulatedPaths: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+});
+
+TaskSchema.virtual('Levels', {
+    localField: 'level',
+    foreignField: '_id',
+    ref: 'levels',
 });
 
 module.exports = mongoose.model('tasks', TaskSchema);

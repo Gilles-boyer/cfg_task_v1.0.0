@@ -1,18 +1,29 @@
 var express = require('express');
 var router = express.Router();
 var { seeders } = require('../database/seeders/seed');
-const bcrypt = require('bcrypt');
+var { index } = require("../controllers/Folder.Controller");
 
-
+//route create for seed
+// router.get('/seed', seeders);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/seed', seeders);
-router.get('/test', (req, res, next) => {
-    res.json(bcrypt.hashSync('password', 12));
-});
+
+
+
+
+/////////////////////Folder Route/////////////////////////////
+router.get('/folders', index);
+
+//Level Route
+
+//User Route
+
+//Task Route
+
+//UserTask Route
 
 module.exports = router;
