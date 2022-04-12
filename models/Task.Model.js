@@ -33,10 +33,10 @@ const TaskSchema = new Schema({
     toObject: { virtuals: true }
 });
 
-TaskSchema.virtual('Levels', {
-    localField: 'level',
-    foreignField: '_id',
-    ref: 'levels',
+TaskSchema.virtual('Users', {
+    localField: '_id',
+    foreignField: 'task',
+    ref: 'usersTasks',
 });
 
 module.exports = mongoose.model('tasks', TaskSchema);
