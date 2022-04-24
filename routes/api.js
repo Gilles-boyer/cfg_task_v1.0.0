@@ -9,10 +9,9 @@ var Version = require("../controllers/Version.Controller");
 var Email = require("../controllers/Email.Controler");
 var Validator = require("../controllers/Validator.Controller");
 var Token = require("../service/auth");
-
 //route create for seed
 // router.get('/seed', seeders);
-
+//route
 /* GET users listing. */
 router.get("/", function(req, res, next) {
     res.send("respond with a resource");
