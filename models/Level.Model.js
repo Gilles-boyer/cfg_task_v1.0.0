@@ -1,21 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const LevelSchema = new Schema({
     label: {
         type: String,
         unique: true,
-        required: true
+        required: true,
     },
     color: {
         type: String,
-        unique: true,
-        required: true
+        required: true,
     },
     definition: {
         type: String,
-        required: true
+        required: true,
+    },
+    archived: {
+        type: Boolean,
+        default: false,
     },
 });
 
-module.exports = mongoose.model('levels', LevelSchema);
+module.exports = mongoose.model("levels", LevelSchema);
