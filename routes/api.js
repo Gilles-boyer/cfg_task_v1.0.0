@@ -9,18 +9,16 @@ var Version = require("../controllers/Version.Controller");
 var Email = require("../controllers/Email.Controler");
 var Validator = require("../controllers/Validator.Controller");
 var Token = require("../service/auth");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../swagger.json");
-//route create for seed
-// router.get('/seed', seeders);
-//route
-/* GET users listing. */
-router.get("/", function(req, res, next) {
-    res.send("respond with a resource");
-});
 
-router.use("/api-docs", swaggerUi.serve);
-router.get("/api-docs", swaggerUi.setup(swaggerDocument));
+/**
+ * @swagger
+ * GET /
+ * @summary This is the summary of the endpoint
+ * @return {object} 200 - success response
+ */
+router.get("/", function(req, res, next) {
+    res.statut(200).json("respond with a resource");
+});
 
 /////////////////////Folder Route/////////////////////////////
 router.get("/folders", Token.auth, Folder.index);

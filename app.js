@@ -3,11 +3,44 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const version = require("./controllers/Version.Controller");
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 var indexRouter = require("./routes/index");
 var apiRouter = require("./routes/api");
 
+const swaggerDefinition = {
+    openapi: "3.0.0",
+    info: {
+        title: "Api CFG My Task V1.0",
+        version: "1.0.0",
+        description: "API de gestion dossier et de tache",
+        license: {
+            name: "Licensed Under MIT",
+            url: "https://spdx.org/licenses/MIT.html",
+        },
+        contact: {
+            name: "Gilles BOYER",
+            url: "http://gilles-boyer.re",
+        },
+    },
+    servers: [{
+        url: "https://mytaskcfg.herokuapp.com/api",
+        description: "Serveur heroku de production",
+    }, ],
+};
+
+const options = {
+    swaggerDefinition,
+    // Paths to files containing OpenAPI definitions
+    apis: ["./routes/api.js"],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
 var app = express();
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(version.index);
 
