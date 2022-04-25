@@ -9,6 +9,8 @@ var Version = require("../controllers/Version.Controller");
 var Email = require("../controllers/Email.Controler");
 var Validator = require("../controllers/Validator.Controller");
 var Token = require("../service/auth");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
 //route create for seed
 // router.get('/seed', seeders);
 //route
@@ -16,6 +18,9 @@ var Token = require("../service/auth");
 router.get("/", function(req, res, next) {
     res.send("respond with a resource");
 });
+
+router.use("/api-docs", swaggerUi.serve);
+router.get("/api-docs", swaggerUi.setup(swaggerDocument));
 
 /////////////////////Folder Route/////////////////////////////
 router.get("/folders", Token.auth, Folder.index);
@@ -85,6 +90,7 @@ router.get(
 );
 router.get(
     "/user/:id/reset/password",
+    Token.auth,
     Validator.validateParamsId,
     User.resetPassword
 );

@@ -1,0 +1,23 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Doc Api CFG MyTask",
+        "description": "Api de gestion de taches par projet",
+        "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "host": "localhost:3000",
+    "basePath": "/api/",
+    "paths": {
+        "/folders": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "swagTest",
+                "tags": ["/folders"],
+                "description": "",
+                "parameters": [],
+                "responses": {}
+            }
+        }
+    }
+}

@@ -138,7 +138,7 @@ htmlResetPassword = (use, token) => {
     html += `<p>Un nouveau mot de passe a été demandé pour l'adresse : ${use.email}.
             Si vous souhaitez demander la modification du mot de pass, 
             merci de cliquer sur le lien ci-dessous :</p>`;
-    html += `<p><a href="http://localhost:8080/#/user/${token}/reset/password"> Reset Your Password </a></p>`;
+    html += `<p><a href="https://mytaskcfg.herokuapp.com/#/user/${token}/reset/password"> Reset Your Password </a></p>`;
     html += "</body>";
 
     return html;
