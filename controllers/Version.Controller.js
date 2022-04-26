@@ -1,7 +1,11 @@
 const { Decimal128 } = require("mongodb");
 const Version = require("../models/Version.Model");
 
-module.exports.index = (req, res, next) => {
+/**
+ *@param next (go to next method)
+ * check if table exist, if don't exist, init table with value 0.01
+ **/
+module.exports.init = (req, res, next) => {
     Version.find()
         .then((version) => {
             if (version.length == 0) {
@@ -15,6 +19,13 @@ module.exports.index = (req, res, next) => {
     next();
 };
 
+/**
+ *@param {object} res (response)
+ *@param {number} req.params.version
+ *@returns {res.status(200).json(version)} { modify : true or false }
+ * check version in req.params.version and if version in bdd is sup, so return response
+ * object with modify true and a last version in bdd
+ **/
 module.exports.verifyVersion = (req, res) => {
     Version.find()
         .then((version) => {
@@ -31,6 +42,10 @@ module.exports.verifyVersion = (req, res) => {
         .catch((error) => res.status(500).send(error));
 };
 
+/**
+ * return version in bdd to number
+ *@returns {number} numeric of version
+ **/
 module.exports.show = () => {
     var ver;
     Version.find().then((version) => {
@@ -39,6 +54,9 @@ module.exports.show = () => {
     return ver;
 };
 
+/**
+ * Modify version by new version +0.01;
+ **/
 module.exports.addModVersion = () => {
     Version.find()
         .then((version) => {

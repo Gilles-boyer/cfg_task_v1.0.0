@@ -6,18 +6,26 @@ const Version = require("../controllers/Version.Controller");
 
 module.exports.index = (req, res) => {
     Folder.find({ archived: false })
-        .select(["id", "label", "Tasks"])
+        .select(["_id", "id", "label", "Tasks"])
         .populate({
             path: "Tasks",
-            select: ["id", "title", "createdAt", "archived", "Levels", "level"],
+            select: [
+                "_id",
+                "id",
+                "title",
+                "createdAt",
+                "archived",
+                "Levels",
+                "level",
+            ],
             populate: [
                 "level",
                 {
                     path: "Users",
-                    select: ["id", "user"],
+                    select: ["_id", "id", "user"],
                     populate: {
                         path: "user",
-                        select: ["id", "firstName", "lastName"],
+                        select: ["_id", "id", "firstName", "lastName"],
                     },
                 },
             ],
@@ -28,16 +36,16 @@ module.exports.index = (req, res) => {
 
 module.exports.archiveList = (req, res) => {
     Folder.find({ archived: true })
-        .select(["id", "label", "Tasks", "createdAt", "updatedAt"])
+        .select(["_id", "id", "label", "Tasks", "createdAt", "updatedAt"])
         .populate({
             path: "Tasks",
-            select: ["id", "title", "createdAt", "archived", "updatedAt"],
+            select: ["_id", "id", "title", "createdAt", "archived", "updatedAt"],
             populate: [{
                 path: "Users",
-                select: ["id", "user"],
+                select: ["_id", "id", "user"],
                 populate: {
                     path: "user",
-                    select: ["id", "firstName", "lastName"],
+                    select: ["_id", "id", "firstName", "lastName"],
                 },
             }, ],
         })

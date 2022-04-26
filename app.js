@@ -42,7 +42,7 @@ var app = express();
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(version.index);
+app.use(version.init);
 
 app.use(express.static("public/dist"));
 

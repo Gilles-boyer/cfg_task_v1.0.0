@@ -4,22 +4,24 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     firstName: {
         type: String,
-        lowercase: true,
+        uppercase: true,
         required: true,
     },
     lastName: {
         type: String,
-        uppercase: true,
+        lowercase: true,
         required: true,
     },
     email: {
         type: String,
         unique: true,
+        trim: true,
         lowercase: true,
         required: true,
     },
     password: {
         type: String,
+        trim: true,
         default: "password",
     },
     admin: {

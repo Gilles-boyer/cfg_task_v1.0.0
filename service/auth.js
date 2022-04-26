@@ -3,6 +3,13 @@ const { config } = require("dotenv");
 config();
 const SecretKey = process.env.TOKEN_SECRET;
 
+/**
+ *@param req.headers.authorization (token)
+ *@param res (give a response if catch error)
+ *@param next (go to next method)
+ *
+ * Verify token and define User Auth
+ */
 module.exports.auth = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -11,6 +18,6 @@ module.exports.auth = (req, res, next) => {
 
         next();
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(498).json(error);
     }
 };

@@ -10,14 +10,14 @@ const { revoke } = require("../service/auth");
 
 module.exports.index = (req, res) => {
     User.find({ archived: false })
-        .select(["id", "lastName"])
+        .select(["_id", "id", "lastName"])
         .then((user) => res.status(200).json(user))
         .catch((err) => console.error(err));
 };
 
 module.exports.listUser = (req, res) => {
     User.find({ archived: false })
-        .select(["id", "lastName", "firstName", "admin", "email"])
+        .select(["_id", "id", "lastName", "firstName", "admin", "email"])
         .then((user) => res.status(200).json(user))
         .catch((err) => console.error(err));
 };

@@ -16,6 +16,19 @@ niv.extendMessages({
     "en"
 );
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (label, color, definition) and validate data
+ * @req.body.label required|string|minLength:3
+ * @req.body.color required|hexColor
+ * @req.body.definition required|contains:mdi
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateLevel = (req, res, next) => {
     const v = new Validator(req.body, {
         label: "required|string|minLength:3",
@@ -25,12 +38,23 @@ module.exports.validateLevel = (req, res, next) => {
 
     v.check().then((matched) => {
         if (!matched) {
-            return res.status(422).send(v.errors);
+            return res.status(422).json(v.errors);
         }
         next();
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (_id) and validate data
+ * @req.body._id "required|mongoId"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateBodyId = (req, res, next) => {
     const v = new Validator(req.body, {
         _id: "required|mongoId",
@@ -44,6 +68,17 @@ module.exports.validateBodyId = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (id) and validate data
+ * @req.body.id "required|mongoId"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateBodyID = (req, res, next) => {
     const v = new Validator(req.body, {
         id: "required|mongoId",
@@ -57,6 +92,17 @@ module.exports.validateBodyID = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.params (id) and validate data
+ * @req.params.id "required|mongoId"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateParamsId = (req, res, next) => {
     const v = new Validator(req.params, {
         id: "required|mongoId",
@@ -70,6 +116,19 @@ module.exports.validateParamsId = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (firstName, lastName, email) and validate data
+ * @req.body.firstName "required|string|minLength:3"
+ * @req.body.lastName "required|string|minLength:3"
+ * @req.body.email "required|email"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateUser = (req, res, next) => {
     const v = new Validator(req.body, {
         firstName: "required|string|minLength:3",
@@ -85,6 +144,17 @@ module.exports.validateUser = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (admin) and validate data
+ * @req.body.admin "required|boolean"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateBodyAdmin = (req, res, next) => {
     const v = new Validator(req.body, {
         admin: "required|boolean",
@@ -98,6 +168,19 @@ module.exports.validateBodyAdmin = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (title, level, users) and validate data
+ * @req.body.title "required|string|minLength:3"
+ * @req.body.level "required|string|mongoId"
+ * @req.body.users "required|array"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateTask = (req, res, next) => {
     const v = new Validator(req.body, {
         title: "required|string|minLength:3",
@@ -113,6 +196,21 @@ module.exports.validateTask = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (addFolder, folder) and validate data
+ * @req.body.addFolder "required|boolean"
+ * if addFolder = true check :
+ * @req.body.folder "required|string|minLength:3"
+ * else
+ * @req.body.folder "required|mongoId"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateTaskFolder = (req, res, next) => {
     const v = new Validator(req.body, {
         addFolder: "required|boolean",
@@ -146,6 +244,17 @@ module.exports.validateTaskFolder = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (label) and validate data
+ * @req.body.label  "required|string|minLength:3"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateFolder = (req, res, next) => {
     const v = new Validator(req.body, {
         label: "required|string|minLength:3",
@@ -159,6 +268,17 @@ module.exports.validateFolder = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (password) and validate data
+ * @req.body.password  "required|string|minLength:8"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validatePassword = (req, res, next) => {
     const v = new Validator(req.body, {
         password: "required|string|minLength:8",
@@ -172,6 +292,18 @@ module.exports.validatePassword = (req, res, next) => {
     });
 };
 
+/**
+ * @param {req} body
+ * @param {res} response
+ * @param {next} next
+ * check req.body (password, email) and validate data
+ * @req.body.email  "required|email"
+ * @req.body.password  "required|string|minLength:8"
+ * if error
+ * @return {response.status(422).json(v.errors)}
+ * or if all it's ok
+ * @next
+ */
 module.exports.validateLogin = (req, res, next) => {
     const v = new Validator(req.body, {
         email: "required|email",
