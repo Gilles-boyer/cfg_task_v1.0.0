@@ -25,7 +25,7 @@ const swaggerDefinition = {
         },
     },
     servers: [{
-        url: "https://mytaskcfg.herokuapp.com/api",
+        url: "http://localhost:3000/api",
         description: "Serveur heroku de production",
     }, ],
 };

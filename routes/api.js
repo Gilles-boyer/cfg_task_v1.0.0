@@ -12,12 +12,19 @@ var Token = require("../service/auth");
 
 /**
  * @swagger
- * GET /
- * @summary This is the summary of the endpoint
- * @return {object} 200 - success response
+ * /:
+ *   get:
+ *     summary: Test api work.
+ *     description: Check if api give a response 200.
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
  */
 router.get("/", function(req, res, next) {
-    res.statut(200).json("respond with a resource");
+    res.status(200).json("respond with a resource");
 });
 
 /////////////////////Folder Route/////////////////////////////
