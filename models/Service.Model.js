@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const LevelSchema = new Schema({
-    label: {
+const ServiceSchema = new Schema({
+    name: {
         type: String,
         unique: true,
         required: true,
@@ -11,7 +11,7 @@ const LevelSchema = new Schema({
         type: String,
         required: true,
     },
-    definition: {
+    icon: {
         type: String,
         required: true,
     },
@@ -21,4 +21,4 @@ const LevelSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model("levels", LevelSchema);
+module.exports = mongoose.model("services", ServiceSchema);

@@ -8,6 +8,11 @@ const swaggerUi = require("swagger-ui-express");
 
 var indexRouter = require("./routes/index");
 var apiRouter = require("./routes/api");
+var apiTask = require("./routes/task");
+var apiService = require("./routes/service");
+var apiFolder = require("./routes/folder");
+var apiUser = require("./routes/user");
+var apiRally = require("./routes/resa-rally");
 
 const swaggerDefinition = {
     openapi: "3.0.0",
@@ -24,6 +29,17 @@ const swaggerDefinition = {
             url: "http://gilles-boyer.re",
         },
     },
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+            },
+        },
+    },
+    security: [{
+        bearerAuth: [],
+    }, ],
     servers: [{
         url: "http://localhost:3000/api",
         description: "Serveur heroku de production",
@@ -66,6 +82,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/api", apiRouter);
+//app.use("/api", apiRouter);
+app.use("/api/task", apiTask);
+app.use("/api/service", apiService);
+app.use("/api/folder", apiFolder);
+app.use("/api/user", apiUser);
+app.use("/api/rally", apiRally);
 
 module.exports = app;

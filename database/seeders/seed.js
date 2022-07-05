@@ -7,9 +7,9 @@ const UserTask = require("../factories/userTask.factory");
 async function seed(nbr, factory) {
     var res = await factory.Factory(nbr);
     if (res.length > 0) {
-        res.forEach(element => {
+        res.forEach((element) => {
             element.save((err, task) => {
-                if (err) return console.log(err);;
+                if (err) return console.log(err);
                 return console.log(task);
             });
         });
@@ -26,4 +26,4 @@ module.exports.seeders = async(req, res) => {
     await seed(60, UserTask);
 
     res.json("seed effected");
-}
+};

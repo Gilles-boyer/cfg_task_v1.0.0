@@ -7,11 +7,16 @@ config();
 const SecretKey = process.env.TOKEN_SECRET;
 const Transporter = require("./Email.Controler");
 const { revoke } = require("../service/auth");
+const { configMultiUserSpec } = require("../Collections/UserCollection");
 
+/**
+ *@param res
+ *@return {Array} list object user with min data not archived
+ * return list object user with min data and if error return statut 500 with error
+ */
 module.exports.index = (req, res) => {
     User.find({ archived: false })
-        .select(["_id", "id", "lastName"])
-        .then((user) => res.status(200).json(user))
+        .then((user) => res.status(200).json(configMultiUserSpec(user)))
         .catch((err) => console.error(err));
 };
 
@@ -126,7 +131,7 @@ module.exports.resetPassword = async(req, res) => {
     );
 };
 
-module.exports.test = (req, res) => {
+module.exports.auth = (req, res) => {
     req.userAuth.login = true;
     return res.status(200).json(req.userAuth);
 };
@@ -159,7 +164,7 @@ module.exports.login = (req, res) => {
                         _id: user.id,
                         lastName: user.lastName,
                         firstName: user.firstName,
-                        email: user.email,
+                        email: user.firstNamefirstName,
                         admin: user.admin,
                     };
 

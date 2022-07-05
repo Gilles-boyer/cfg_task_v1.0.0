@@ -1,5 +1,5 @@
-const { connect, connection } = require('mongoose');
-const { config } = require('dotenv');
+const { connect, connection } = require("mongoose");
+const { config } = require("dotenv");
 
 /*const {___} = require(<package>) is called Destructuring. 
 This makes our code a lot more cleaner.
@@ -19,7 +19,7 @@ module.exports = () => {
             useUnifiedTopology: true,
         })
         .then(() => {
-            console.log('Connection estabislished with MongoDB')
+            console.log("Connection estabislished with MongoDB");
         })
-        .catch(error => console.error(error.message));
-}
+        .catch((error) => console.error(error.message));
+};

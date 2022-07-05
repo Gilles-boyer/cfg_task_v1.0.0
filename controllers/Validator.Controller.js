@@ -20,20 +20,20 @@ niv.extendMessages({
  * @param {req} body
  * @param {res} response
  * @param {next} next
- * check req.body (label, color, definition) and validate data
- * @req.body.label required|string|minLength:3
+ * check req.body (name, color, icon) and validate data
+ * @req.body.name required|string|minLength:3
  * @req.body.color required|hexColor
- * @req.body.definition required|contains:mdi
+ * @req.body.icon required|contains:mdi
  * if error
  * @return {response.status(422).json(v.errors)}
  * or if all it's ok
  * @next
  */
-module.exports.validateLevel = (req, res, next) => {
+module.exports.validateService = (req, res, next) => {
     const v = new Validator(req.body, {
-        label: "required|string|minLength:3",
+        name: "required|string|minLength:3",
         color: "required|hexColor",
-        definition: "required|contains:mdi",
+        icon: "required|contains:mdi",
     });
 
     v.check().then((matched) => {
@@ -184,8 +184,10 @@ module.exports.validateBodyAdmin = (req, res, next) => {
 module.exports.validateTask = (req, res, next) => {
     const v = new Validator(req.body, {
         title: "required|string|minLength:3",
-        level: "required|string|mongoId",
-        users: "required|array",
+        dateLimit: "required",
+        service: "required|string|mongoId",
+        folder: "required|string|mongoId",
+        userTask: "required|array",
     });
 
     v.check().then((matched) => {
