@@ -4,6 +4,7 @@ var ResaRally = require("../controllers/Rally.Controler");
 
 router.get("/", ResaRally.index);
 router.post("/store/resa", ResaRally.store);
-router.post("/update/:id/pilote", ResaRally.addPilote);
+router.get("/update/pilote", ResaRally.addPilote);
+router.get("/update/session/pilote/:id", ResaRally.updateSession);
 
 module.exports = router;

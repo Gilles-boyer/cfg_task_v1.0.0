@@ -2,16 +2,9 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const version = require("./controllers/Version.Controller");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
-var indexRouter = require("./routes/index");
-var apiRouter = require("./routes/api");
-var apiTask = require("./routes/task");
-var apiService = require("./routes/service");
-var apiFolder = require("./routes/folder");
-var apiUser = require("./routes/user");
 var apiRally = require("./routes/resa-rally");
 
 const swaggerDefinition = {
@@ -58,7 +51,6 @@ var app = express();
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(version.init);
 
 app.use(express.static("public/dist"));
 
@@ -81,12 +73,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-//app.use("/api", apiRouter);
-app.use("/api/task", apiTask);
-app.use("/api/service", apiService);
-app.use("/api/folder", apiFolder);
-app.use("/api/user", apiUser);
 app.use("/api/rally", apiRally);
 
 module.exports = app;

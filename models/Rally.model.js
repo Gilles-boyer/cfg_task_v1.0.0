@@ -14,16 +14,18 @@ var RallySchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-
-    pilote: {
-        type: Array
-    }
 }, {
     timestamps: true,
     versionKey: false,
     selectPopulatedPaths: false,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+});
+
+RallySchema.virtual("Pilotes", {
+    localField: "_id",
+    foreignField: "rally",
+    ref: "pilotes",
 });
 
 module.exports = mongoose.model("rallyes", RallySchema);
