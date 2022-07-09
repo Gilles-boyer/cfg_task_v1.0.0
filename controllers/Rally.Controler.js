@@ -31,37 +31,55 @@ module.exports.store = (req, res) => {
 };
 
 module.exports.addPilote = (req, res) => {
-    req.query.rallyId = JSON.parse(req.query.rallyId);
+    var pilotes = [];
+    req.query.rallyId = req.query.rallyId.split(' ');
 
     req.query.rallyId.forEach(id => {
-        var pilote = new Pilote(
-            {
+        var pilote = {
                 name        : req.query.name,
                 voiture     : req.query.voiture,
-                formule     : req.query.formule,
+                formule     : selectFormuleById(req.query.formule).name,
                 phone       : req.query.phone,
-                rally       : req.query.rallyId,
-                nbrSession  : nbrSessionRoulage(req.query.formule),
+                rally       : id,
+                nbrSession  : selectFormuleById(req.query.formule).nbr,
                 paiement    : true
-            }
-        )
-        pilote.save((err, newPilote) => {
-            if (err) return res.status(500).json(err);
-        });
+        };
+        pilotes.push(pilote);
     });
 
-    return res.status(201).json({
-        response: "Pilote ajouté"
+    Pilote.insertMany(pilotes)
+    .then(function(){
+        return res.status(201).json({
+           response: "pilote ajouté"
+        });
+    })
+    .catch(function(error){
+        return res.status(500).json(error);
     });
+
 };
 
-var nbrSessionRoulage = (formule) => {
-    if(formule == "1 sessions 10min => 25€"){
-        return 1;
-    } else if(formule == "3 sesions 10min => 60€"){
-        return 3;
+var selectFormuleById = (id) => {
+    if(id == 1) {
+        return {
+            name: "1 sessions 10min => 25€",
+            nbr:1
+        };
+    } else if (id == 2) {
+        return {
+            name: "3 sesions 10min => 60€",
+            nbr:3
+        };
+    } else if (id == 3) {
+        return {
+            name: "1/2 journée => 180€",
+            nbr:99
+        };
     } else {
-        return 99;
+        return {
+            name: "1 journée => 250€",
+            nbr:99
+        };
     }
 };
 
