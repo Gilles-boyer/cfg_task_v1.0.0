@@ -6,6 +6,7 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 var apiRally = require("./routes/resa-rally");
+const apiCaisse = require("./routes/caisse");
 
 const swaggerDefinition = {
     openapi: "3.0.0",
@@ -74,5 +75,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/rally", apiRally);
+app.use("/api/caisse", apiCaisse);
 
 module.exports = app;
