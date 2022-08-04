@@ -17,6 +17,7 @@ module.exports.store = (req, res) => {
     cbsc: req.body.cbsc,
     cheque: req.body.cheque,
     sortie: req.body.sortie,
+    surPlusEspece : req.body.surPlusEspece,
   });
 
   caisse.save((err, newCaisse) => {
@@ -26,3 +27,9 @@ module.exports.store = (req, res) => {
     });
   });
 };
+
+module.exports.index = (req, res) => {
+  Caisse.find().sort({createdAt: 'desc'})
+  .then((caisses) => res.status(200).json(caisses))
+  .catch((err) => res.status(500).json(err));
+}

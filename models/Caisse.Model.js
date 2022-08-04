@@ -10,6 +10,7 @@ var CaisseShema = new mongoose.Schema({
     cbsc : { type: Object, required: true },
     cheque: { type: Object, required: true },
     sortie: { type: Object, required: true },
+    surPlusEspece: {type: Boolean, required: true},
 }, {
     timestamps: true,
     versionKey: false,
