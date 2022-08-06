@@ -16,6 +16,7 @@ module.exports.store = (req, res) => {
     cb: req.body.cb,
     cbsc: req.body.cbsc,
     cheque: req.body.cheque,
+    ticket: req.body.ticket,
     sortie: req.body.sortie,
     surPlusEspece : req.body.surPlusEspece,
   });
