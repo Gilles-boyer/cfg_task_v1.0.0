@@ -30,7 +30,7 @@ module.exports.store = (req, res) => {
 };
 
 module.exports.index = (req, res) => {
-  Caisse.find().sort({createdAt: 'desc'})
+  Caisse.find({checked : false}).sort({createdAt: 'desc'})
   .then((caisses) => res.status(200).json(caisses))
   .catch((err) => res.status(500).json(err));
 }

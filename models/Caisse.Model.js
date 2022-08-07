@@ -12,6 +12,7 @@ var CaisseShema = new mongoose.Schema({
     ticket: { type: Object, required: true },
     sortie: { type: Object, required: true },
     surPlusEspece: {type: Boolean, required: true},
+    checked: {type: Boolean, default: false}
 }, {
     timestamps: true,
     versionKey: false,
