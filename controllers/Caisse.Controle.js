@@ -34,6 +34,11 @@ module.exports.index = (req, res) => {
   .then((caisses) => res.status(200).json(caisses))
   .catch((err) => res.status(500).json(err));
 }
+module.exports.indexWithArchive = (req, res) => {
+  Caisse.find().sort({createdAt: 'desc'})
+  .then((caisses) => res.status(200).json(caisses))
+  .catch((err) => res.status(500).json(err));
+}
 
 module.exports.validCaisse = (req, res) => {
   Caisse.findById(req.params.id)
